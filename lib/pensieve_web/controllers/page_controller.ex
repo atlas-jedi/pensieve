@@ -8,6 +8,8 @@ defmodule PensieveWeb.PageController do
   end
 
   def about(conn, _params) do
-    render(conn, :about)
+    conn
+    |> assign(:welcome, "Bem-vindo ao Pensieve!")
+    |> render(:about)
   end
 end

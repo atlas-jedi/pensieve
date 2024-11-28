@@ -1,2 +1,26 @@
 <h1 class="text-3xl mb-6">Sobre</h1>
+
+<p><%= @welcome %></p>
 <p>Este é o aplicativo Pensieve, construído usando Elixir e Phoenix.</p>
+
+<%!--
+<ul>
+ <%= for number <- 1..10 do %>
+   <li><%= number %></li>
+ <% end %>
+</ul>
+--%>
+
+<ul>
+  <li :for={number <- 1..10}><%= number %></li>
+</ul>
+
+<p class="mt-3">
+  &copy; <%= Date.utc_today.year %>
+
+  <%= if Date.leap_year?(Date.utc_today) do %>
+    (Este é um ano bissexto)
+  <% else %>
+    (Este não é um ano bissexto)
+  <% end %>
+</p>
