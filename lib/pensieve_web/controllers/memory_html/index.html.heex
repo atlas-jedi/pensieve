@@ -1,5 +1,7 @@
 <h1 class="text-3xl mb-6">Memories</h1>
 
+<.information memories={@memories} />
+
 <ul class="list-disc">
   <li :for={memory <- @memories}><%= memory.title %></li>
 </ul>
