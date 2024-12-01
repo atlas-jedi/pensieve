@@ -17,6 +17,7 @@ defmodule PensieveWeb.Router do
   scope "/", PensieveWeb do
     pipe_through :browser
 
+    resources "/memories", MemoryController
     get "/", PageController, :home
     get "/about", PageController, :about
   end
