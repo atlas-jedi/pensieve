@@ -12,6 +12,13 @@
     ·
     <.link href={~p"/memories/#{memory}/edit"} class="text-sky-500 hover:underline">Edit</.link>
     ·
-    <.link href={~p"/memories/#{memory}"} method="delete" class="text-sky-500 hover:underline">Delete</.link>
+    <.link
+      href={~p"/memories/#{memory}"}
+      method="delete"
+      class="text-sky-500 hover:underline"
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
   </:action>
 </.table>
