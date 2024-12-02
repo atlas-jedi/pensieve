@@ -2,7 +2,7 @@
 
 <p class="mt-4 mb-4"><%= @memory.content %></p>
 
-<div class="mb-4">Added: <%= @memory.inserted_at %></div>
+<div class="mb-4">Added: <%= memory_inserted_at(@memory) %></div>
 
 <.link href={~p"/memories/#{@memory}/edit"} class="text-sky-500 hover:underline">Edit</.link>
 ·

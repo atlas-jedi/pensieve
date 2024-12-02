@@ -6,7 +6,7 @@
 
 <.table id="memories" rows={@memories}>
   <:col :let={memory} label="Title"><%= memory.title %></:col>
-  <:col :let={memory} label="Added"><%= memory.inserted_at %></:col>
+  <:col :let={memory} label="Added"><%= memory_inserted_at(memory) %></:col>
   <:action :let={memory}>
     <.link href={~p"/memories/#{memory}"} class="text-sky-500 hover:underline">View</.link>
     ·
