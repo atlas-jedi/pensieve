@@ -1,0 +1,9 @@
+<h1 class="text-3xl mb-2"><%= @memory.title %></h1>
+
+<p class="mt-4 mb-4"><%= @memory.content %></p>
+
+<div class="mb-4">Added: <%= @memory.inserted_at %></div>
+
+<.link href={~p"/memories/#{@memory}/edit"} class="text-sky-500 hover:underline">Edit</.link>
+·
+<.link href={~p"/memories"} class="text-sky-500 hover:underline">Back</.link>
