@@ -2,6 +2,16 @@
 
 <.information memories={@memories} />
 
-<ul class="list-disc">
-  <li :for={memory <- @memories}><%= memory.title %></li>
-</ul>
+<.link href={~p"/memories/new"} class="text-sky-500 hover:underline">Add new</.link>
+
+<.table id="memories" rows={@memories}>
+  <:col :let={memory} label="Title"><%= memory.title %></:col>
+  <:col :let={memory} label="Added"><%= memory.inserted_at %></:col>
+  <:action :let={memory}>
+    <.link href={~p"/memories/#{memory}"} class="text-sky-500 hover:underline">View</.link>
+    ·
+    <.link href={~p"/memories/#{memory}/edit"} class="text-sky-500 hover:underline">Edit</.link>
+    ·
+    <.link href={~p"/memories/#{memory}"} method="delete" class="text-sky-500 hover:underline">Delete</.link>
+  </:action>
+</.table>
