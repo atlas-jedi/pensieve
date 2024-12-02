@@ -1,0 +1,16 @@
+<h1 class="text-3xl mb-2">New Memory</h1>
+
+<.simple_form :let={f} for={@changeset} action={~p"/memories"}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:title]} type="text" label="Title" />
+  <.input field={f[:content]} type="textarea" label="Content" />
+  <:actions>
+    <.button>Save Memory</.button>
+  </:actions>
+</.simple_form>
+
+<br />
+
+<.link href={~p"/memories"} class="text-sky-500 hover:underline">Back</.link>

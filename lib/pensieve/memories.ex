@@ -10,6 +10,10 @@ defmodule Pensieve.Memories do
     Repo.get!(Memory, id)
   end
 
+  def change_memory(%Memory{} = memory, attrs \\ %{}) do
+    Memory.changeset(memory, attrs)
+  end
+
   def create_memory(attrs \\ %{}) do
     %Memory{}
     |> Memory.changeset(attrs)
