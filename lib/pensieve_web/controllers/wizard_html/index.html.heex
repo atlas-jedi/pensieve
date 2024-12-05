@@ -1,0 +1,26 @@
+<.header>
+  Listing Wizards
+  <:actions>
+    <.link href={~p"/wizards/new"}>
+      <.button>New Wizard</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="wizards" rows={@wizards} row_click={&JS.navigate(~p"/wizards/#{&1}")}>
+  <:col :let={wizard} label="First name"><%= wizard.first_name %></:col>
+  <:col :let={wizard} label="Last name"><%= wizard.last_name %></:col>
+  <:col :let={wizard} label="House"><%= wizard.house %></:col>
+  <:col :let={wizard} label="Points"><%= wizard.points %></:col>
+  <:action :let={wizard}>
+    <div class="sr-only">
+      <.link navigate={~p"/wizards/#{wizard}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/wizards/#{wizard}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={wizard}>
+    <.link href={~p"/wizards/#{wizard}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

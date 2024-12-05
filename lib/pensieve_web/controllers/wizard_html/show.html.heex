@@ -1,0 +1,18 @@
+<.header>
+  Wizard <%= @wizard.id %>
+  <:subtitle>This is a wizard record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/wizards/#{@wizard}/edit"}>
+      <.button>Edit wizard</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="First name"><%= @wizard.first_name %></:item>
+  <:item title="Last name"><%= @wizard.last_name %></:item>
+  <:item title="House"><%= @wizard.house %></:item>
+  <:item title="Points"><%= @wizard.points %></:item>
+</.list>
+
+<.back navigate={~p"/wizards"}>Back to wizards</.back>
