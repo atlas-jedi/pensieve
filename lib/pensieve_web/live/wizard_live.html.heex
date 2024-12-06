@@ -1,0 +1,8 @@
+<h1>Search Wizards</h1>
+
+<.input name="search" value="" placeholder="Filter by name..." phx-keyup="search" />
+
+<.table id="wizards" rows={@wizards}>
+  <:col :let={wizard} label="First name"><%= wizard.first_name %></:col>
+  <:col :let={wizard} label="Last name"><%= wizard.last_name %></:col>
+</.table>

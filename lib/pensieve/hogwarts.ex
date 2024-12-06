@@ -101,4 +101,14 @@ defmodule Pensieve.Hogwarts do
   def change_wizard(%Wizard{} = wizard, attrs \\ %{}) do
     Wizard.changeset(wizard, attrs)
   end
+
+  def search_wizards_by_name(name) do
+    query = "%#{name}%"
+    Repo.all(
+      from(
+        w in Wizard,
+        where: ilike(w.first_name, ^query) or ilike(w.last_name, ^query)
+      )
+    )
+  end
 end

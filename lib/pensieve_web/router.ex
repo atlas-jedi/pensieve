@@ -17,6 +17,7 @@ defmodule PensieveWeb.Router do
   scope "/", PensieveWeb do
     pipe_through :browser
 
+    live "/wizards/search", WizardLive
     resources "/memories", MemoryController
     resources "/wizards", WizardController
     get "/", PageController, :home
