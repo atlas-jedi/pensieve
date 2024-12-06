@@ -103,12 +103,25 @@ defmodule Pensieve.Hogwarts do
   end
 
   def search_wizards_by_name(name) do
-    query = "%#{name}%"
-    Repo.all(
-      from(
-        w in Wizard,
-        where: ilike(w.first_name, ^query) or ilike(w.last_name, ^query)
-      )
+    query_parts = String.split(name, " ")
+
+    from(w in Wizard, where: ^build_dynamic_conditions(query_parts))
+    |> Repo.all()
+  end
+
+  defp build_dynamic_conditions([single_name]) do
+    dynamic(
+      [w],
+      ilike(w.first_name, ^"%#{single_name}%") or
+      ilike(w.last_name, ^"%#{single_name}%")
+    )
+  end
+
+  defp build_dynamic_conditions([first_name, last_name]) do
+    dynamic(
+      [w],
+      ilike(w.first_name, ^"%#{first_name}%") and
+      ilike(w.last_name, ^"%#{last_name}%")
     )
   end
 end
