@@ -3,6 +3,8 @@
 <.information memories={@memories} />
 
 <.link href={~p"/memories/new"} class="text-sky-500 hover:underline">Add new</.link>
+·
+<.link href={~p"/memories?_format=csv"} class="text-sky-500 hover:underline">Download CSV</.link>
 
 <.table id="memories" rows={@memories}>
   <:col :let={memory} label="Title"><%= memory.title %></:col>

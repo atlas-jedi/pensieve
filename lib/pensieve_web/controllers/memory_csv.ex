@@ -1,53 +1,61 @@
 defmodule PensieveWeb.MemoryCSV do
+  @moduledoc """
+  Handles CSV formatting for Memory records.
+
+  Provides utility functions to convert Memory records into CSV strings
+  suitable for HTTP responses.
+  """
+
   alias Pensieve.Memories.Memory
 
-  @type list_of_memories :: [%Memory{}]
+  @headers ["ID", "Title", "Content", "Created At"]
+
+  @type memory_list :: [%Memory{}]
+  @type memory_payload :: %{memories: memory_list}
+  @type single_memory_payload :: %{memory: %Memory{}}
 
   @doc """
-  Returns the format for the CSV response.
+  Returns the content type for CSV responses.
   """
-  @spec format :: String.t()
-  def format, do: "text/csv"
+  @spec content_type :: String.t()
+  def content_type, do: "text/csv"
 
   @doc """
-  Returns the CSV representation of the index page.
+  Converts a list of memories to a CSV string.
   """
-  @spec index(%{memories: list_of_memories}) :: String.t()
+  @spec index(memory_payload) :: String.t()
   def index(%{memories: memories}) do
     memories
-    |> Enum.map(&memory_to_list/1)
-    |> prepend_headers()
-    |> encode_csv()
+    |> Enum.map(&to_row/1)
+    |> add_headers()
+    |> to_csv()
   end
 
   @doc """
-  Returns the CSV representation of the show page.
+  Converts a single memory to a CSV string.
   """
-  @spec show(%Memory{}) :: String.t()
-  def show(%Memory{} = memory) do
-    [memory]
-    |> Enum.map(&memory_to_list/1)
-    |> prepend_headers()
-    |> encode_csv()
+  @spec show(single_memory_payload) :: String.t()
+  def show(%{memory: memory}) do
+    [to_row(memory)]
+    |> add_headers()
+    |> to_csv()
   end
 
-  defp memory_to_list(%Memory{id: id, title: title, content: content, inserted_at: inserted_at}) do
+  defp to_row(%Memory{id: id, title: title, content: content, inserted_at: inserted_at}) do
     [id, title, content, format_datetime(inserted_at)]
   end
 
-  defp prepend_headers(records) do
-    headers = ["ID", "Title", "Content", "Created At"]
-    [headers | records]
-  end
+  defp add_headers(rows), do: [@headers | rows]
 
-  defp encode_csv(records) do
-    records
+  defp to_csv(rows) do
+    rows
     |> CSV.encode()
-    |> Enum.to_list()
-    |> Enum.join("")
+    |> Enum.join()
   end
 
   defp format_datetime(datetime) do
     Calendar.strftime(datetime, "%Y-%m-%d %H:%M:%S")
+  rescue
+    ArgumentError -> "Invalid Date"
   end
 end
