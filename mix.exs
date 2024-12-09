@@ -60,7 +60,8 @@ defmodule Pensieve.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:faker, "~> 0.17.0"},
-      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:csv, "~> 3.0"}
     ]
   end
 
